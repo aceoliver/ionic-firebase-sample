@@ -1,0 +1,38 @@
+body {
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+.photo-grid .photo-item {
+    float: left;
+    width:  25%;
+    height: auto;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.photo-grid .photo-item img {
+    min-width: 100%;
+    height: auto;
+}
+
+/* http://www.mademyday.de/css-height-equals-width-with-pure-css.html */
+.box{
+    position: relative;
+    width: 100%;
+}
+.box:before{
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+.box-content{
+    position:  absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>Ionic Firebase Sample</title>
+
+    <!-- build:css styles/vendor.css -->
+    <!-- <link rel="stylesheet" href="vendor/some.contrib.css"> -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/ionic/release/css/ionic.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+  </head>
+
+  <body ng-app="IonicFirebaseSample" ng-controller="HomeCtrl as home" ng-cloak>
+
+    <ion-pane>
+        <ion-header-bar class="bar-positive">
+            <h1 class="title">More Fun in the Philippines - Gallery</h1>
+            <div class="buttons">
+                <button class="button" ng-click="actions.toggleList()">
+                    {{ mode === 'list' ? 'Grid' : 'List' }}
+                </button>
+            </div>
+        </ion-header-bar>
+
+        <ion-content>
+            <photo-grid photos="photos" list-mode="mode"></photo-grid>
+        </ion-content>
+    </ion-pane>
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- <script src="vendor/someContribJs.js"></script> -->
+    <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/collide/collide.js"></script>
+    <script src="bower_components/ionic/release/js/ionic.js"></script>
+    <script src="bower_components/ionic/release/js/ionic-angular.js"></script>
+    <script src="bower_components/firebase/firebase.js"></script>
+    <script src="bower_components/firebase-simple-login/firebase-simple-login.js"></script>
+    <script src="bower_components/mockfirebase/dist/mockfirebase.js"></script>
+    <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
+    <script src="bower_components/ngCordova/dist/ng-cordova.js"></script>
+    <script src="bower_components/ngCordova/dist/ng-cordova.min.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- build:js scripts/scripts.js -->
+    <script src="scripts/config.js"></script>
+    <script src="scripts/app.js"></script>
+    <!-- endbuild -->
+
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({appId: '528583627197585', status: true, cookie: true, xfbml: true});
+        };
+        (function() {
+            var e = document.createElement('script'); e.async = true;
+            e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+            document.getElementById('fb-root').appendChild(e);
+        }());
+    </script>
+
+    <script id="photo-grid.html" type="text/ng-template">
+        <div class="photo-grid">
+            <div class="box photo-item" ng-repeat="photo in photos | orderBy:order:reverse"><img ng-src="{{ photo.photo | thumb:150 }}" alt="Fun Photo" class="box-content" /></div>
+        </div>
+    </script>
+
+    <script id="photo-list.html" type="text/ng-template">
+        <div class="list card" ng-repeat="photo in photos | orderBy:order:reverse">
+            <author photo="photo"></author>
+            <div class="item item-body">
+                <img class="full-image" ng-src="{{ photo.photo | thumb:300 }}" alt="Fun Photo" />
+            </div>
+        </div>
+    </script>
+
+    <script id="author.html" type="text/ng-template">
+        <div class="item item-avatar">
+            <img class="author-photo" />
+            <h2>{{ authorName }}</h2>
+            <p>{{ photo.timestamp | fullDate }}</p>
+        </div>
+    </script>
+</body>
+</html>
