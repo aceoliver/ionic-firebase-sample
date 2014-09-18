@@ -58,21 +58,12 @@
     <script src="cordova.js"></script>
 
     <!-- build:js scripts/scripts.js -->
+    <script src="lib/fb.js"></script>
     <script src="scripts/config.js"></script>
     <script src="scripts/app.js"></script>
     <!-- endbuild -->
 
-    <div id="fb-root"></div>
-    <script>
-        window.fbAsyncInit = function() {
-            FB.init({appId: '528583627197585', status: true, cookie: true, xfbml: true});
-        };
-        (function() {
-            var e = document.createElement('script'); e.async = true;
-            e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-            document.getElementById('fb-root').appendChild(e);
-        }());
-    </script>
+    <fb app-id='528583627197585'></fb>
 
     <script id="photo-grid.html" type="text/ng-template">
         <div class="photo-grid">

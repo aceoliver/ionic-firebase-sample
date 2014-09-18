@@ -3,21 +3,20 @@
 angular.module('IonicFirebaseSample', [
     'ionic',
     'config',
-    'firebase'
+    'firebase',
+    'facebook'
   ])
 
+  .config(function() {
+
+  })
+
   .run(function($ionicPlatform) {
+
     $ionicPlatform.ready(function() {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
-      if(window.cordova && window.cordova.plugins.Keyboard) {
-        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      }
-      if(window.StatusBar) {
-        // org.apache.cordova.statusbar required
-        StatusBar.styleDefault();
-      }
+      // initializations here
     });
+
   })
 
   .filter('thumb', function(ENV) {
@@ -65,16 +64,23 @@ angular.module('IonicFirebaseSample', [
     return directive;
   })
 
-  .directive('author', function($filter) {
+  .directive('author', function($filter, $FB) {
     function link(scope, element) {
-      FB.api('/' + scope.photo.userId, function(userdata) {
-        scope.authorName = userdata.name;
-        scope.$apply();
-      });
 
-      element
-        .find('img')
-        .attr('src', 'https://graph.facebook.com/' + scope.photo.userId + '/picture');
+      scope.$watch(function() {
+        return $FB.loaded;
+      }, function(loaded) {
+        if ( loaded ) {
+          $FB.api('/' + scope.photo.userId, function(userdata) {
+            scope.authorName = userdata.name;
+            scope.$apply();
+          });
+
+          element
+            .find('img')
+            .attr('src', 'https://graph.facebook.com/' + scope.photo.userId + '/picture');
+        }
+      });
 
     }
 
