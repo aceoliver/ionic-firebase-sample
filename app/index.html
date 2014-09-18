@@ -21,10 +21,10 @@
 
     <ion-pane>
         <ion-header-bar class="bar-positive">
-            <h1 class="title">More Fun in the Philippines - Gallery</h1>
+            <h1 class="title">morefunin.ph</h1>
             <div class="buttons">
                 <button class="button" ng-click="actions.toggleList()">
-                    {{ mode === 'list' ? 'Grid' : 'List' }}
+                    View as {{ mode === 'list' ? 'Grid' : 'List' }}
                 </button>
             </div>
         </ion-header-bar>
@@ -84,7 +84,7 @@
         <div class="list card" ng-repeat="photo in photos | orderBy:order:reverse">
             <author photo="photo"></author>
             <div class="item item-body">
-                <img class="full-image" ng-src="{{ photo.photo | thumb:300 }}" alt="Fun Photo" />
+                <img class="full-image" ng-src="{{ photo.photo | thumb:250 }}" alt="Fun Photo" />
             </div>
         </div>
     </script>
